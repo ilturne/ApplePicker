@@ -14,6 +14,10 @@ public class DespawnOffScreen : MonoBehaviour
         if (transform.position.y < Camera.main.ScreenToWorldPoint(Vector3.zero).y - 1f)
         {
             Destroy(gameObject);
+            if (gameObject.tag == "Apple") {
+                GameObject.Find("Player").GetComponent<PlayerLives>().RemoveLife();
+            }
         }   
     }
+
 }

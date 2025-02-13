@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rotten_apple_0: -3795462457327685702
+      Rotten_apple_1: 3642811690197970507
+      Rotten_apple_2: -2410096600480648491
+      Rotten_apple_3: -1321786062502715538
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

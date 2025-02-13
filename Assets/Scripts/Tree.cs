@@ -23,7 +23,6 @@ public class Tree : MonoBehaviour
         // Move the tree using its current direction
         rb.linearVelocity = new Vector2(movementDirection.x * moveSpeed, rb.linearVelocityY);
 
-        // Reverse direction when hitting screen edges, considering the buffer
         if (transform.position.x < screenLeftX + buffer)
         {
             movementDirection = Vector2.right; 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6983496837196924719}
   - component: {fileID: 1887697386389097478}
   - component: {fileID: 5590486766729745978}
-  - component: {fileID: 1881821754821071572}
+  - component: {fileID: 153922503482076444}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Apple
@@ -153,7 +153,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1881821754821071572
+--- !u!114 &153922503482076444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

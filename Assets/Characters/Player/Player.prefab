@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 643796018642231510}
   - component: {fileID: 8390079355440659938}
   - component: {fileID: 6032148452991047742}
-  - component: {fileID: 7275076277224881605}
   - component: {fileID: 2410117393139088647}
   - component: {fileID: 4301411607120158647}
   m_Layer: 0
@@ -118,19 +117,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7275076277224881605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464608085225909873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362eb81acaf42c241ab36c8770a51bbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 250
 --- !u!114 &2410117393139088647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +144,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7275076277224881605}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Basket_Controller, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
