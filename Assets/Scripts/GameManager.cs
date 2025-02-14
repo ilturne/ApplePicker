@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int basketCount = 0;
     private int currentRound = 1;
-    private const int basketsNeededForRound = 10;
+    private const int basketsNeededForRound = 3;
     private const int maxRounds = 4;
 
     private void Awake()
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         score += points;
         basketCount++;
         UpdateScoreUI();
+        Debug.Log("Score: " + score + " | Basket Count: " + basketCount + " | Current Round: " + currentRound);
         CheckLevelProgress();
     }
 
@@ -52,33 +54,32 @@ public class GameManager : MonoBehaviour
 
     private void CheckLevelProgress()
     {
-        // If the player makes more than (or equal to) max rounds worth of baskets, show Game Over
         if (basketCount >= maxRounds * basketsNeededForRound)
         {
             GameOver();
         }
-        // If the player just completed a round and there's another round to go, advance the round
         else if (basketCount % basketsNeededForRound == 0)
         {
             currentRound++;
 
             if (roundTextPrefab != null)
             {
-                // Instantiate the RoundText prefab. Assumes the prefab has a TextMeshProUGUI component in its children.
-                GameObject roundTextInstance = Instantiate(roundTextPrefab);
-                TextMeshProUGUI tmp = roundTextInstance.GetComponentInChildren<TextMeshProUGUI>();
-                if (tmp != null)
+                // Find the existing RoundText GameObject
+                TextMeshProUGUI roundText = roundTextPrefab.GetComponent<TextMeshProUGUI>();
+
+                if (roundText != null)
                 {
-                    tmp.text = "Round " + currentRound;
+                    roundText.text = "Round " + currentRound;
+                    roundText.gameObject.SetActive(true); // Make sure it's always visible
                 }
                 else
                 {
-                    Debug.LogWarning("RoundText prefab does not have a TextMeshProUGUI component!");
+                    Debug.LogWarning("RoundText GameObject does not have a TextMeshProUGUI component!");
                 }
             }
             else
             {
-                Debug.LogWarning("RoundText prefab is not assigned in the inspector!");
+                Debug.LogWarning("RoundText GameObject is not assigned in the Inspector!");
             }
         }
     }
@@ -95,7 +96,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameOver Panel is not assigned in the inspector!");
         }
         
-        // Update the score shown in the restart panel
         if (gameOverScoreText != null)
         {
             gameOverScoreText.text = "Score: " + score;
@@ -108,10 +108,16 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
     }
 
+    public void LoadMainMenu()
+    {
+        RestartGameState();
+        SceneManager.LoadScene("Main Menu");
+    }
+
     public void RestartGame()
     {
         RestartGameState();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("ApplePicker");
     }
 
     public void RestartGameState()
@@ -130,15 +136,23 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("GameOver Panel is not assigned in the inspector!");
         }
+        
+        StartCoroutine(FindPlayerLivesAfterSceneLoad());
+    }
+
+    private IEnumerator FindPlayerLivesAfterSceneLoad()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         PlayerLives playerLives = FindFirstObjectByType<PlayerLives>();
         if (playerLives != null)
         {
+            Debug.Log("PlayerLives found after scene reload. Resetting lives...");
             playerLives.ResetLives();
         }
         else
         {
-            Debug.LogWarning("Player Lives script is not found in the scene!");
+            Debug.LogWarning("Player Lives script is not found in the scene after reloading!");
         }
     }
 

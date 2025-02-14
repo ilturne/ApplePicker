@@ -14,7 +14,7 @@ public class PlayerLives : MonoBehaviour
         CreatePlayers();
     }
 
-    private void CreatePlayers()
+    public void CreatePlayers()
     {
         baskets = new GameObject[lives + 1]; // +1 to include the player basket
 
